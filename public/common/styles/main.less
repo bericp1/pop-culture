@@ -1,0 +1,42 @@
+@import "../../vendor/bootswatch/journal/variables.less";
+
+body{
+  /*@media screen and (min-width: 400px) {
+    &>div.container:first-child{
+      margin-top: 50px;
+    }
+  }*/
+  header,footer{
+    background: @brand-primary;
+    font-weight: bold;
+
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+  }
+
+  header{
+    margin-bottom: 30px;
+
+    h1{
+      color: @body-bg;
+      margin:0;
+      margin-bottom: 20px;
+    }
+    h2{
+      color: @body-bg;
+      margin:0;
+      margin-bottom: 5px;
+    }
+  }
+  footer{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+  }
+
+  @media (max-width: 767px){
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}

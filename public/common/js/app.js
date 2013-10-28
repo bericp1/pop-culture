@@ -3,15 +3,11 @@
  */
 (function(angular){
   'use strict';
-  angular.module('pop-culture', ['compiled-templates', 'ngRoute', 'exampleModule'])
+  angular.module('pop-culture', ['compiled-templates', 'ngRoute', 'quizModule', 'presentationModule'])
     .config(['$routeProvider', function ($routeProvider) {
       $routeProvider
-        .when('/', {
-          templateUrl: 'examples/main.tmpl',
-          controller: 'ExampleController'
-        })
         .otherwise({
-          redirectTo: '/'
+          redirectTo: '/quiz/new-player'
         });
     }]);
 })(angular);

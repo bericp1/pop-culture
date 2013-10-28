@@ -1,0 +1,31 @@
+<header>
+  <h1>Marketing and Advertising</h1>
+  <h2>The Quiz</h2>
+</header>
+<div class="container new-player-container">
+  <div class="row-fluid">
+    <div class="offset2 span4 well">
+      <h3>New Player</h3>
+
+      <div class="form-group">
+        <div class="input-group">
+          <input type="text" placeholder="Name" ng-model="player.name" class="form-control">
+        <span class="input-group-btn">
+          <input type="button" value="Start!" class="btn btn-primary">
+        </span>
+        </div>
+      </div>
+
+    </div>
+    <div class="span4 well">
+      <h3>Current Games</h3>
+      <div ng-show="quiz.games.length < 1" class="muted text-center">No games available :-(</div>
+      <ul class="current-games">
+        <li ng-repeat="game in quiz.games"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<footer>
+
+</footer>
