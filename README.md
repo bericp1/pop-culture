@@ -41,7 +41,7 @@ Yet to be implemented :-(
  * ~~Implement usemin, concat, and uglify~~
  * Implement cache busting of all assets referenced in all files (templates, css files, etc.)
  * Improve heroku-specific setup process to account for errors, pipe std* instead of buffering to a string, and more
- * Eventually turn this into a yeoman buildpack thing or a standalone tool all together
+ * Eventually turn this into a yeoman buildpack thing or a standalone tool altogether
  * Improve rename setup process so that it doesn't rely on simple find/replace and and actually knows where to change the app name
  * Make these TODO items actual bugs on github -_-
  * Lots more...

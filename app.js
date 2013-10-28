@@ -15,7 +15,8 @@ app.set('publicDir',  'public');
 
 //Production Middleware
 if(app.get('env') === 'production'){
-  app.use(express.bodyParser());
+  app.use(express.json());
+  app.use(express.urlencoded());
   app.use(express.methodOverride());
   app.use(express.static(path.join(__dirname, app.get('publicDir'))));
   app.use(app.router);
@@ -25,7 +26,8 @@ if(app.get('env') === 'production'){
 //Development Middleware
 else{
   app.use(connectLivereload());
-  app.use(express.bodyParser());
+  app.use(express.json());
+  app.use(express.urlencoded());
   app.use(express.methodOverride());
   app.use(express.static(path.join(__dirname, app.get('tmpDir'))));
   app.use(express.static(path.join(__dirname, app.get('publicDir'))));
