@@ -3,7 +3,7 @@
  */
 (function(angular){
   'use strict';
-  angular.module('not-a-sock-drawer', ['compiled-templates', 'ngRoute', 'exampleModule'])
+  angular.module('pop-culture', ['compiled-templates', 'ngRoute', 'exampleModule'])
     .config(['$routeProvider', function ($routeProvider) {
       $routeProvider
         .when('/', {
