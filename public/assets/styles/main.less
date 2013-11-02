@@ -1,27 +1,31 @@
 @import "../../vendor/bootswatch/cosmo/variables.less";
 
+html{
+  background: @brand-primary;
+}
+
 body{
   /*@media screen and (min-width: 400px) {
     &>div.container:first-child{
       margin-top: 50px;
     }
   }*/
-  header,footer{
+
+  .header,.footer{
     background: @brand-primary;
     font-weight: bold;
     color: @body-bg;
 
     width: 100%;
-    box-sizing: border-box;
     padding: 20px;
 
     h1,h2,h3,h4,h5,h6{
       color: inherit;
-      margin:0;
+      margin: 0;
     }
   }
 
-  header{
+  .header{
     margin-bottom: 30px;
 
     h1{
@@ -31,10 +35,28 @@ body{
       margin-bottom: 5px;
     }
   }
-  footer{
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
+
+  .footer{
+    margin-top: 20px;
+  }
+
+  .container{
+    h1,h2,h3,h4,h5,h6{
+      margin: 0;
+      padding: 0;
+    }
+    h1{
+      margin-bottom: 30px;
+    }
+    h2, h3{
+      margin-bottom: 25px;
+    }
+    h4{
+      margin-bottom: 15px;
+    }
+    h5,h6{
+      margin-bottom: 10px;
+    }
   }
 
   @media (max-width: 767px){

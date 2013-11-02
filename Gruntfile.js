@@ -82,7 +82,7 @@ module.exports = function (grunt) {
         '!public/scripts*.js',
         '!public/styles*.css',
         '!public/vendor',
-        '!public/common',
+        '!public/assets',
         '!node_modules/**/*'
       ]
     },
@@ -140,11 +140,11 @@ module.exports = function (grunt) {
       },
       prod: {
         src: 'public/**/*.tmpl',
-        dest: 'public/common/js/templates.js'
+        dest: 'public/assets/js/templates.js'
       },
       dev: {
         src: 'public/**/*.tmpl',
-        dest: '.tmp/common/js/templates.js'
+        dest: '.tmp/assets/js/templates.js'
       }
     },
     less:{

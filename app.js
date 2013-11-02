@@ -13,7 +13,7 @@ var app = module.exports = express();
 //Configuration
 app.set('port',       process.env.PORT || 8000);
 app.set('env',        process.env.NODE_ENV || 'development');
-app.set('extra',      '');
+app.set('moreToLog',  '');
 app.set('mongoURI',   process.env.MONGOLAB_URI || 'mongodb://localhost:27017/pop-culture');
 app.set('routesDir',  path.join(__dirname, 'routes'));
 app.set('modelsDir',  path.join(__dirname, 'models'));
@@ -41,10 +41,10 @@ conn.once('open', function(){
   modelsToLoad.forEach(function(v){
     var metaModel = require(path.join(app.get('modelsDir'),v));
     if(metaModel.hasOwnProperty('name') && metaModel.hasOwnProperty('schema')){
-      mongoose.model(metaModel.name, metaModel.schema);
+      mongoose.model(metaModel.name, new mongoose.Schema(metaModel.schema));
     }
   });
-  app.set('extra', modelsToLoad);
+  app.set('moreToLog', modelsToLoad);
 
   //Production Middleware
   if(app.get('env') === 'production'){
@@ -71,6 +71,6 @@ conn.once('open', function(){
 
 //Start Listening
   app.listen(app.get('port'), function () {
-    console.log('Listening on port ' + app.get('port') + ' in ' + app.get('env') + ' mode.\n', app.get('extra'));
+    console.log('Listening on port ' + app.get('port') + ' in ' + app.get('env') + ' mode.\n', app.get('moreToLog'));
   });
 });

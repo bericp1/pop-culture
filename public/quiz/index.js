@@ -1,5 +1,5 @@
-/*global QuizNewPlayerController, QuizResource*/
-(function(angular, QuizNewPlayerController, QuizResource){
+/*global QuizNewPlayerController, QuizGameResource*/
+(function(angular, QuizNewPlayerController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox){
   'use strict';
   angular
     .module('quizModule', ['ngRoute', 'ngResource'])
@@ -8,12 +8,20 @@
         .when('/quiz/new-player',{
           controller: 'QuizNewPlayerController',
           templateUrl: 'quiz/templates/new-player.tmpl'
+        })
+        .when('/quiz/admin', {
+          controller: 'QuizAdminController',
+          templateUrl: 'quiz/templates/admin.tmpl'
         });
     }])
-    .factory('QuizResource', QuizResource);
+    .factory('GameResource',  QuizGameResource)
+    .directive('head',        QuizHead)
+    .directive('foot',        QuizFoot)
+    .directive('statusBox',  QuizStatusBox)
+    .directive('adminPasswordBox',  QuizAdminPasswordBox);
 
   /*me.controller('ExampleController', Controller);
   me.service('ExampleModel', Model);
   me.directive('exampleDirective', directive);
   me.factory('exampleService', service);*/
-})(angular, QuizNewPlayerController, QuizResource);
+})(angular, QuizNewPlayerController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox);
