@@ -1,4 +1,4 @@
-/*export QuizAdminPasswordBox */
+/*exported QuizAdminPasswordBox */
 var QuizAdminPasswordBox = (function(){
   'use strict';
   return function(){
@@ -9,16 +9,16 @@ var QuizAdminPasswordBox = (function(){
         valid: '=adminPasswordBox',
         onChange: '=passwordOnChange'
       },
-      link: function(scope, $elem, attrs){
+      link: function(scope, $elem){
         scope.actualPassword = '4ostddu1';
         $elem.on('keyup', 'input', function(){
           if(scope.enteredPassword === scope.actualPassword && !scope.valid){
             scope.valid = true;
-            if(typeof scope.onChange === 'function'){onChange(scope.valid);}
+            if(typeof scope.onChange === 'function'){scope.onChange(scope.valid);}
             scope.$apply();
           }else if(scope.enteredPassword !== scope.actualPassword && scope.valid){
             scope.valid = false;
-            if(typeof scope.onChange === 'function'){onChange(scope.valid);}
+            if(typeof scope.onChange === 'function'){scope.onChange(scope.valid);}
             scope.$apply();
           }
         });

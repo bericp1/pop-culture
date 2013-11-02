@@ -34,7 +34,7 @@ app.post('/', function(req, res){
 });
 
 app.delete('/:id', function(req, res){
-  if(req.param('id') == '*'){
+  if(req.param('id') === '*'){
     var games = Game.find(utils.handleDBActionInRoute(req, res));
     return Game.find().remove(function(err){
       if(err) return utils.handleDBErrorInRoute(res, err);

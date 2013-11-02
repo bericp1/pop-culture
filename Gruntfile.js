@@ -105,7 +105,6 @@ module.exports = function (grunt) {
         nonew: true,
         quotmark: 'single',
         regexp: true,
-        strict: true,
         trailing: true,
         undef: true,
         unused: true
@@ -120,6 +119,7 @@ module.exports = function (grunt) {
           browser: true,
           node: false,
           esnext: false,
+          strict: true,
           globals: {
             angular: false,
             '$': false,

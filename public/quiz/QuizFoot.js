@@ -1,4 +1,4 @@
-/*export QuizFoot */
+/*exported QuizFoot */
 var QuizFoot = (function(){
   'use strict';
   return function(){

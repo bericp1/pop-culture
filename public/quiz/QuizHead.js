@@ -1,4 +1,4 @@
-/*export QuizHead */
+/*exported QuizHead */
 var QuizHead = (function(){
   'use strict';
   return function(){

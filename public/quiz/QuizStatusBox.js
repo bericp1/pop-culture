@@ -1,4 +1,4 @@
-/*export QuizStatusBox */
+/*exported QuizStatusBox */
 var QuizStatusBox = (function(){
   'use strict';
   return function(){

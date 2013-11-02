@@ -1,4 +1,4 @@
-/*global QuizNewPlayerController, QuizGameResource*/
+/*global QuizNewPlayerController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox*/
 (function(angular, QuizNewPlayerController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox){
   'use strict';
   angular
