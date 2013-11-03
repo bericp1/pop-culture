@@ -59,7 +59,10 @@
       </div>
       <div class="panel-body">
         <strong>Type:</strong> <em>{{question.type}}</em><br>
-        <strong>Answer:</strong> <em>{{question.answer}}</em><br>
+        <strong>Answers:</strong>
+        <ul>
+          <li ng-repeat="a in question.answers">{{a}}</li>
+        </ul>
         <strong>Worth:</strong> <em>{{question.worth}}</em> <strong>points</strong>
       </div>
       <div class="btn-group-sm btn-group-justified panel-footer">
@@ -85,7 +88,14 @@
     </div>
     <div class="form-group">
       <label class="control-label">Answer</label>
-      <input type="text" ng-model="data.new.question.answer" ng-keyup="enterCheck($event, data.funcs.question.new)" class="form-control">
+      <input type="text" ng-model="data.new.question.answerUnprocessed" ng-keyup="enterCheck($event, data.funcs.question.new)" class="form-control">
+      <div class="text-info help-block">
+        Seperate possible answers (tacobell vs. Taco Bell) with pipes (|).<br>
+        Ex. "tacobell|Taco Bell"
+      </div>
+      <div class="text-warning help-block">
+        Note: matches are already case insensitive.
+      </div>
     </div>
     <div class="form-group">
       <label class="control-label">Worth</label>

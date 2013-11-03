@@ -109,6 +109,10 @@ var QuizNewPlayerController = (function(){
         });
       };
 
+      $scope.enterCheck = function($event, fn){
+        if($event.keyCode === 13 && !$scope.data.processing && $scope.data.games.length > 0) fn();
+      };
+
     }
   ];
 })();

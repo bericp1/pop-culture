@@ -11,6 +11,7 @@
           placeholder="Name"
           ng-model="data.player.name"
           ng-disabled="data.saved"
+          ng-keyup="enterCheck($event, fn.newPlayer)"
           class="form-control">
       </div>
 
@@ -32,7 +33,7 @@
     </div>
     <div class="panel panel-warning span4">
       <div class="panel-heading">Please note:</div>
-      <div class="panel-body">
+      <div class="panel-body text-center">
         You must have cookies enabled in you phone/PC's browser to be able to play. If you don't know what these are
         (and no, I'm not talking about food), then you're most likely fine. Thanks!
       </div>

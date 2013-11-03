@@ -1,7 +1,7 @@
 module.exports = {
   name: 'Question',
   schema: {
-    answer: String,
+    answers: [String],
     content: String,
     type: String,
     worth: Number

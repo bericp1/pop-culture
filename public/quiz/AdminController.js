@@ -72,7 +72,7 @@ var QuizAdminController = (function(){
             $scope.data.status = 'Failed to create new ' + thing;
             $scope.data.statusClass = STATUS_CLASS_ERROR;
             if(typeof data.data.error !== 'undefined'){
-              $scope.data.status = $scope.data.status + ': ' + data.data.error;
+              $scope.data.status = $scope.data.status + ':<br>' + data.data.error;
             }
           });
         },
@@ -141,6 +141,10 @@ var QuizAdminController = (function(){
       $scope.$on('question.reload', function(){
         $scope.data.questions = QuestionResource.query();
       });
+
+      $scope.$watch('data.new.question.answerUnprocessed', function(){
+        $scope.data.new.question.answers = $scope.data.new.question.answerUnprocessed.split('|');
+      }, true);
 
       $scope.$on('player.reload', function(){
         $scope.data.players = PlayerResource.query();

@@ -15,7 +15,7 @@
   ){
   'use strict';
   angular
-    .module('quizModule', ['ngRoute', 'ngResource', 'ngCookies'])
+    .module('quizModule', ['ngRoute', 'ngResource', 'ngCookies', 'ngSanitize'])
     .config(['$routeProvider', function ($routeProvider) {
       $routeProvider
         .when('/quiz/new-player',{
