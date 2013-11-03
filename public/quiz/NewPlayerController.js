@@ -40,7 +40,7 @@ var QuizNewPlayerController = (function(){
         }, function(data){
           $cookieStore.remove('player');
           if(typeof data.data.error === 'string'){
-            alert(':-/ Save data corrupt: ' + data.data.error);
+            alert(':-/\nSave data corrupt: ' + data.data.error);
           }
         });
       }
@@ -59,27 +59,33 @@ var QuizNewPlayerController = (function(){
           $cookieStore.put('player', newPlayer._id);
           //TODO Won'e be necessary to get game once autoPopulate is implemented
           GameResource.get({_id: $scope.data.player.game}, function(game){
-            alert(':-) Ready to join game ' + game.name + '!');
             $location.path('/quiz/game/' + game._id);
           }, function(data){
             if(typeof data.data.error === 'string'){
-              alert(':/ Whoops: ' + data.data.error); //TODO Replace
+              alert(':/\nWhoops: ' + data.data.error); //TODO Replace
               $scope.data.player = $scope.data.playerDefaults;
               $scope.data.processing = false;
             }else{
-              alert('D: Something really bad went wrong! Try again later.'); //TODO Replace
+              alert('D:\nSomething really bad went wrong! Try again later.'); //TODO Replace
             }
           });
           $scope.data.player = $scope.data.playerDefaults;
           $scope.data.processing = false;
         }, function(data){
-          if(typeof data.data.error === 'string'){
-            console.log(data);
-            alert(':/ Whoops: ' + data.data.error); //TODO Replace
+          if(typeof data.data.invalid === 'object'){
+            var str = '';
+            $.each(data.data.invalid, function(i,v){
+              str = str + '\n' + v.name + ': ' + v.message;
+            });
+            alert('-_-\nThere\'s something wrong with the data you entered:' + str);
+            $scope.data.player = $scope.data.playerDefaults;
+            $scope.data.processing = false;
+          }else if(typeof data.data.error === 'string'){
+            alert(':/\nWhoops:\n' + data.data.error); //TODO Replace
             $scope.data.player = $scope.data.playerDefaults;
             $scope.data.processing = false;
           }else{
-            alert('D: Something really bad went wrong! Try again later.'); //TODO Replace
+            alert('D:\nSomething really bad went wrong! Try again later.'); //TODO Replace
           }
         });
       };
@@ -95,10 +101,10 @@ var QuizNewPlayerController = (function(){
           $scope.processing = false;
         }, function(data){
           if(typeof data.data.error === 'string'){
-            alert(':/ Couldn\'t unregister you as a player: ' + data.data.error); //TODO Replace
+            alert(':/\nCouldn\'t unregister you as a player: ' + data.data.error); //TODO Replace
             $scope.data.processing = false;
           }else{
-            alert('D: Something really bad went wrong! Try again later.'); //TODO Replace
+            alert('D:\nSomething really bad went wrong! Try again later.'); //TODO Replace
           }
         });
       };

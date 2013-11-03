@@ -128,7 +128,7 @@
       <div class="panel-body">
         <strong>Questions:</strong>
         <ul>
-          <li ng-repeat="question in quiz.questions">{{question}}</li>
+          <li ng-repeat="question in quiz.questions"><strong>{{question.type}}</strong>: {{question.content}}</li>
         </ul>
       </div>
       <div class="btn-group-sm btn-group-justified panel-footer">
@@ -190,7 +190,7 @@
       <div class="panel-body">
         <strong>Quizzes:</strong>
         <ul>
-          <li ng-repeat="quiz in game.quizzes">{{quiz}}</li>
+          <li ng-repeat="quiz in game.quizzes">{{quiz.name}}</li>
         </ul>
       </div>
       <div class="btn-group-sm btn-group-justified panel-footer">
@@ -242,11 +242,11 @@
     <div ng-hide="data.players.length > 0" class="text-warning text-center well-sm">No Players</div>
 
     <div class="form-group" ng-repeat="player in data.players">
-      <span class="input-group">
+      <span class="input-group input-group-sm">
         <span class="input-group-addon">
           {{player.name}}
         </span>
-        <input type="text" readonly="readonly" ng-model="player.game" class="form-control text-right">
+        <input type="text" readonly="readonly" ng-model="player.game.name" class="form-control text-center">
         <span class="input-group-addon">
           {{player.points}} points
         </span>
