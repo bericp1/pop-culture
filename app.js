@@ -44,13 +44,13 @@ conn.once('open', function(){
       mongoose.model(metaModel.name, new mongoose.Schema(metaModel.schema));
     }
   });
-  app.set('moreToLog', modelsToLoad);
 
   //Production Middleware
   if(app.get('env') === 'production'){
     app.use(express.json());
     app.use(express.urlencoded());
     app.use(express.methodOverride());
+    app.use(express.cookieParser());
     app.use(express.static(path.join(__dirname, app.get('publicDir'))));
     app.use(app.router);
     app.use(express.errorHandler());
@@ -62,6 +62,7 @@ conn.once('open', function(){
     app.use(express.json());
     app.use(express.urlencoded());
     app.use(express.methodOverride());
+    app.use(express.cookieParser());
     app.use(express.static(path.join(__dirname, app.get('tmpDir'))));
     app.use(express.static(path.join(__dirname, app.get('publicDir'))));
     app.use(app.router);

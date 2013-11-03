@@ -58,12 +58,6 @@ module.exports = function (grunt) {
           port: 8000,
           'node_env': 'development'
         }
-      },
-      prod: {
-        options: {
-          port: 5000,
-          'node_env': 'production'
-        }
       }
     },
 
@@ -194,6 +188,7 @@ module.exports = function (grunt) {
     'clean:tmp',
     'ngtemplates:dev',
     'less:dev',
+    'loadenv',
     'express:dev',
     'watch'
   ]);

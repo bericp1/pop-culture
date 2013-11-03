@@ -2,7 +2,7 @@
 (function(angular, QuizNewPlayerController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox){
   'use strict';
   angular
-    .module('quizModule', ['ngRoute', 'ngResource'])
+    .module('quizModule', ['ngRoute', 'ngResource', 'ngCookies'])
     .config(['$routeProvider', function ($routeProvider) {
       $routeProvider
         .when('/quiz/new-player',{
