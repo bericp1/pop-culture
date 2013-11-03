@@ -6,11 +6,11 @@ var QuizAdminController = (function(){
     'GameResource',
     'QuizResource',
     'QuestionResource',
-    function
-      ($scope,
-       GameResource,
-       QuizResource,
-       QuestionResource)
+    function (
+      $scope,
+      GameResource,
+      QuizResource,
+      QuestionResource)
     {
 
       var STATUS_CLASS_SUCCESS = 'success';
@@ -79,7 +79,7 @@ var QuizAdminController = (function(){
               $scope.data.newThing('game', GameResource);
             },
             'delete': function(id){
-              $scope.data.deleteThing('game', GameResource, id)
+              $scope.data.deleteThing('game', GameResource, id);
             }
           },
           quiz: {
@@ -87,7 +87,7 @@ var QuizAdminController = (function(){
               $scope.data.newThing('quiz', QuizResource);
             },
             'delete': function(id){
-              $scope.data.deleteThing('quiz', QuizResource, id)
+              $scope.data.deleteThing('quiz', QuizResource, id);
             }
           },
           question: {
@@ -95,7 +95,7 @@ var QuizAdminController = (function(){
               $scope.data.newThing('question', QuestionResource);
             },
             'delete': function(id){
-              $scope.data.deleteThing('question', QuestionResource, id)
+              $scope.data.deleteThing('question', QuestionResource, id);
             }
           }
         },
@@ -124,5 +124,6 @@ var QuizAdminController = (function(){
         $scope.data.questions = QuestionResource.query();
       });
 
-    }];
+    }
+  ];
 })();
