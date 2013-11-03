@@ -11,11 +11,6 @@ module.exports = {
       type: Schema.Types.ObjectId,
       ref: 'Quiz',
       'default': []
-    }],
-    _players: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Player',
-      'default': []
     }]
   }
 };

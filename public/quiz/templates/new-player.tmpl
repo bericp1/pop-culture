@@ -1,27 +1,32 @@
 <div head></div>
-<div class="container new-player-container">
+
+<div class="container new-player-container" ng-if="!data.saved">
   <div class="row-fluid">
     <div class="offset2 span4 well">
-      <h3>Step 1</h3>
-      <h4>What's your name?</h4>
+      <legend>Step 1</legend>
       <div class="form-group">
-          <input type="text" placeholder="Name" ng-model="data.playerName" class="form-control">
+        <label class="control-label">What's your name?</label>
+        <input
+          type="text"
+          placeholder="Name"
+          ng-model="data.player.name"
+          ng-disabled="data.saved"
+          class="form-control">
       </div>
 
     </div>
-    <div class="span4 well smooth-size">
-      <h3>Step 2</h3>
-      <h4>Select a running game.</h4>
+    <div class="span4 well">
+      <legend>Step 2</legend>
 
-      <div ng-show="!data.gamesLoaded">
-        Loading games...
-      </div>
-
-      <div ng-show="data.gamesLoaded">
-        <div ng-show="data.games.length < 1" class="muted text-center">No games available :-(</div>
-        <ul class="current-games">
-          <li ng-repeat="game in data.games">{{game.name}}</li>
-        </ul>
+      <div class="form-group">
+        <label class="control-label">Select a running game.</label>
+        <div ng-show="data.games.length < 1 && data.gamesLoaded" class="muted text-center">No games available :-(</div>
+        <div ng-show="!data.gamesLoaded" class="text-center">Loading games...</div>
+        <select
+          class="form-control"
+          ng-model="data.player.game"
+          ng-show="(data.gamesLoaded && data.games.length > 0)"
+          ng-options="g._id as g.name for g in data.games"></select>
       </div>
 
     </div>
@@ -29,8 +34,30 @@
 
   <div class="row-fluid">
     <div class="offset5 span2 text-center">
-      <input type="button" value="Start" class="btn btn-primary start-button input-block-level">
+      <input
+        type="button"
+        value="Start"
+        class="btn btn-primary start-button input-block-level"
+        ng-disabled="data.processing || (data.games.length < 1 && data.gamesLoaded)"
+        ng-click="fn.newPlayer()">
     </div>
   </div>
 </div>
+
+  <div class="container" ng-if="data.saved">
+    <div class="row-fluid">
+      <div class="offset4 span4 text-center">
+        <h1>Welcome back, {{data.player.name}}!</h1><br><br>
+        <div class="btn-group-vertical">
+          <div ng-click="fn.joinGame()" class="btn btn-primary">
+            Rejoin Game
+          </div>
+          <div ng-click="fn.deletePlayer(data.player._id)" class="btn btn-danger">
+            Delete "{{data.player.name}}" and start a new player
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div foot></div>

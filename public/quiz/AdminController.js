@@ -6,11 +6,13 @@ var QuizAdminController = (function(){
     'GameResource',
     'QuizResource',
     'QuestionResource',
+    'PlayerResource',
     function (
       $scope,
       GameResource,
       QuizResource,
-      QuestionResource)
+      QuestionResource,
+      PlayerResource)
     {
 
       var STATUS_CLASS_SUCCESS = 'success';
@@ -22,6 +24,7 @@ var QuizAdminController = (function(){
         games: GameResource.query(),
         quizzes: QuizResource.query(),
         questions: QuestionResource.query(),
+        players: PlayerResource.query(),
         questionGroups: ['slogan', 'logo', 'commercial'],
         activeQuestionGroup: 'slogan',
         deleteThing: function(thing, ThingResource, id){
@@ -63,7 +66,7 @@ var QuizAdminController = (function(){
           model.$save(function(){
             $scope.data.status = 'New ' + thing + ' created successfully';
             $scope.data.statusClass = STATUS_CLASS_SUCCESS;
-            $scope.data.new[thing] = {};
+            $scope.data.new[thing] = $scope.data.defaults[thing];
             $scope.$broadcast(thing + '.reload');
           }, function(data){
             $scope.data.status = 'Failed to create new ' + thing;
@@ -97,16 +100,31 @@ var QuizAdminController = (function(){
             'delete': function(id){
               $scope.data.deleteThing('question', QuestionResource, id);
             }
+          },
+          player: {
+            'new': function(){
+              $scope.data.newThing('player', PlayerResource);
+            },
+            'delete': function(id){
+              $scope.data.deleteThing('player', PlayerResource, id);
+            }
           }
         },
-        'new':{
+        'new':{},
+        defaults:{
           game: {},
           quiz: {},
           question: {
-            type: 'slogan'
+            type: 'slogan',
+            worth: 0
+          },
+          player: {
+            points: 0
           }
         }
       };
+
+      $scope.data['new'] = $scope.data.defaults;
 
       $scope.enterCheck = function($event, fn){
         if($event.keyCode === 13) fn();
@@ -122,6 +140,10 @@ var QuizAdminController = (function(){
 
       $scope.$on('question.reload', function(){
         $scope.data.questions = QuestionResource.query();
+      });
+
+      $scope.$on('player.reload', function(){
+        $scope.data.players = PlayerResource.query();
       });
 
     }
