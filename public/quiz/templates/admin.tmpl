@@ -160,7 +160,7 @@
         multiple="multiple"
         select
         ng-model="data.new.quiz.questions"
-        ng-options="q._id as q.answer + ': ' + q.content group by q.type for q in data.questions"
+        ng-options="q._id as q.answers.join('|') + ': ' + q.content group by q.type for q in data.questions"
         class="form-control"></select>
     </div>
     <div class="form-group">

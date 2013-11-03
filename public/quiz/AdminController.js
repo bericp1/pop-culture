@@ -143,7 +143,8 @@ var QuizAdminController = (function(){
       });
 
       $scope.$watch('data.new.question.answerUnprocessed', function(){
-        $scope.data.new.question.answers = $scope.data.new.question.answerUnprocessed.split('|');
+        if(typeof $scope.data.new.question.answerUnprocessed === 'string')
+          $scope.data.new.question.answers = $scope.data.new.question.answerUnprocessed.split('|');
       }, true);
 
       $scope.$on('player.reload', function(){

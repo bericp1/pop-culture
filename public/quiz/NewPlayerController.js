@@ -39,8 +39,8 @@ var QuizNewPlayerController = (function(){
           $scope.data.saved = true;
         }, function(data){
           $cookieStore.remove('player');
-          if(typeof data.data.error === 'string'){
-            alert(':-/\nSave data corrupt: ' + data.data.error);
+          if(data.status !== 404 && typeof data.data.error === 'string'){
+            alert(':-/\nSave data corrupt or something:\n' + data.data.error);
           }
         });
       }
