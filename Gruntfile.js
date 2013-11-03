@@ -13,6 +13,30 @@ module.exports = function (grunt) {
   grunt.initConfig({
 
     //General tasks
+
+    shell:{
+      theme:{
+        command:function(toWhich){
+          var bootswatchDir = 'public/vendor/bootswatch/';
+          var activeDir = 'active-theme';
+          var cmd = '';
+          if(typeof toWhich === 'string' && toWhich !== 'list'){
+            cmd = 'rm -rf "' + bootswatchDir + activeDir + '"; ' +
+              'ln -s "' + toWhich + '" "' + bootswatchDir + activeDir + '"';
+          }else{
+            cmd = 'ls "' + bootswatchDir + '"';
+          }
+          console.log('Running: ', cmd.blue);
+          return cmd;
+        },
+        options:{
+          stdout: true,
+          stderr: true,
+          failOnError: true
+        }
+      }
+    },
+
     watch: {
       options: {
         livereload: true
@@ -41,7 +65,7 @@ module.exports = function (grunt) {
         files: 'public/**/*.{woff,otf,ttf,eot}'
       },
       server:{
-        files: ['app.js', 'routes/**/*.js'],
+        files: ['app.js', 'routes/**/*.js', 'lib/**/*.js', 'models/**/*.js'],
         tasks: ['express:dev'],
         options: {
           nospawn: true

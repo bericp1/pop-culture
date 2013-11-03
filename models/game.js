@@ -3,17 +3,19 @@ module.exports = {
   name: 'Game',
   schema: {
     name: String,
-    created: {
+    _created: {
       type: Date,
       'default': Date.now
     },
     quizzes: [{
       type: Schema.Types.ObjectId,
-      ref: 'Quiz'
+      ref: 'Quiz',
+      'default': []
     }],
-    players: [{
+    _players: [{
       type: Schema.Types.ObjectId,
-      ref: 'Player'
+      ref: 'Player',
+      'default': []
     }]
   }
 };

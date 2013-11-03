@@ -4,19 +4,19 @@ var express = require('express'),
 
 var app = module.exports = exports = express();
 
-var GameActions = new DBActions('Game');
+var QuestionActions = new DBActions('Question');
 
 app.use(utils.adminCheckMiddleware);
 app.use(app.router);
 
 //Get all
-app.get('/', GameActions.getAllHandler(false));
+app.get('/', QuestionActions.getAllHandler(false));
 
 //Get one by ID
-app.get('/:id', GameActions.getOneHandler(false));
+app.get('/:id', QuestionActions.getOneHandler(false));
 
 //Add new
-app.post('/', GameActions.updateHandler(true));
+app.post('/', QuestionActions.updateHandler(true));
 
 //Delete one/all
-app.delete('/:id', GameActions.deleteHandler(true));
+app.delete('/:id', QuestionActions.deleteHandler(true));

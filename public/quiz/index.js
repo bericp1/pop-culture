@@ -1,5 +1,5 @@
-/*global QuizNewPlayerController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox*/
-(function(angular, QuizNewPlayerController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox){
+/*global QuizNewPlayerController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox, QuizQuizResource, QuizQuestionResource*/
+(function(angular, QuizNewPlayerController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox, QuizQuizResource, QuizQuestionResource){
   'use strict';
   angular
     .module('quizModule', ['ngRoute', 'ngResource', 'ngCookies'])
@@ -15,6 +15,8 @@
         });
     }])
     .factory('GameResource',  QuizGameResource)
+    .factory('QuizResource',  QuizQuizResource)
+    .factory('QuestionResource',  QuizQuestionResource)
     .directive('head',        QuizHead)
     .directive('foot',        QuizFoot)
     .directive('statusBox',  QuizStatusBox)
@@ -24,4 +26,4 @@
   me.service('ExampleModel', Model);
   me.directive('exampleDirective', directive);
   me.factory('exampleService', service);*/
-})(angular, QuizNewPlayerController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox);
+})(angular, QuizNewPlayerController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox, QuizQuizResource, QuizQuestionResource);
