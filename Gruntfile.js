@@ -90,11 +90,11 @@ module.exports = function (grunt) {
       tmp: '.tmp',
       prod: [
         '**/README.md',
-        'Gruntfile.js',
         'tasks',
         '*.log',
         'public/*',
         'dest',
+        'tmp',
         '!public/favicon.ico',
         '!public/index.html',
         '!public/scripts*.js',
