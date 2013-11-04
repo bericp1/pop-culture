@@ -9,13 +9,15 @@ var QuizGameService = (function(){
     'GameResource',
     'PlayerResource',
     'QuizResource',
+    'socket',
     function(
       $location,
       $cookieStore,
       $rootScope,
       GameResource,
       PlayerResource,
-      QuizResource
+      QuizResource,
+      socket
       ){
 
       var STATE = {
@@ -43,7 +45,7 @@ var QuizGameService = (function(){
             }
           });
         }
-        $rootScope.$on('$routeChangeSuccess', function(event, newRoute){
+        /*$rootScope.$on('$routeChangeSuccess', function(event, newRoute){
           if(me.isJoined() &&
             typeof newRoute.$$route !== 'undefined' &&
             newRoute.$$route.originalPath !== GAME_BASE_PATH &&
@@ -51,7 +53,34 @@ var QuizGameService = (function(){
             event.preventDefault();
             $location.path(GAME_BASE_PATH);
           }
+        });*/
+        $rootScope.$on('qstart', function(event, msg){
+          console.log(msg);
+          me.activeAnswers = msg.answers;
+          me.activeQuestionNumber = msg.number;
+          me.activeQuestionType = msg.type;
+          me.state = STATE.ACTIVE;
         });
+        $rootScope.$on('qlost', function(event, msg){
+          if(me.player._id != msg._id){
+            me.state = STATE.LOST;
+          }
+        });
+        $rootScope.$on('qwon', function(event, msg){
+          if(me.player._id == msg._id){
+            me.state = STATE.WON;
+          }
+        });
+        $rootScope.$on('qend', function(event, msg){
+          delete me.activeAnswers;
+          delete me.activeQuestionNumber;
+          delete me.activeQuestionType;
+          me.state = STATE.WAITING;
+        });
+      };
+
+      Me.prototype.win = function(){
+        socket.emit('iwon', this.player);
       };
 
       Me.prototype.player = {};

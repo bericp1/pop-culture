@@ -75,7 +75,8 @@ module.exports = function (grunt) {
 
     express: {
       options: {
-        script: 'app.js'
+        script: 'app.js',
+        output: '^Listening'
       },
       dev: {
         options: {

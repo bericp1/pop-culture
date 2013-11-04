@@ -18,7 +18,8 @@ var QuizGameController = (function(){
 
       $scope.data = {
         state: $scope.const.STATE.WAITING,
-        player: {}
+        player: {},
+        toCheck: ''
       };
 
       $scope.data.isJoined = GameService.isJoined;
@@ -33,12 +34,33 @@ var QuizGameController = (function(){
       };
 
       $scope.fn.check = function(){
-        //TODO Check
+        var won = false;
+        $.each(GameService.activeAnswers, function(i,v){
+          if(v.toLowerCase().trim() == $scope.data.toCheck.toLowerCase().trim()){
+            GameService.win();
+            won = true;
+            return false;
+          }else{
+            return true;
+          }
+        });
+        if(!won){
+          alert('Try Again!');
+        }
+        $scope.data.toCheck = '';
       };
 
       $scope.$watch(function(){return GameService.player;}, function(data){
         $scope.data.player = data;
       });
+
+      $scope.$watch(function(){return GameService.activeQuestionNumber;}, function(newNum){
+        $scope.data.qNum = newNum;
+      }, true);
+
+      $scope.$watch(function(){return GameService.activeQuestionType;}, function(newType){
+        $scope.data.qType = newType;
+      }, true);
 
       $scope.$watch(function(){return GameService.state;}, function(newState){
         $scope.data.state = newState;

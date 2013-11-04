@@ -17,6 +17,10 @@ var QuizNewPlayerController = (function(){
       GameService
       ){
 
+      if(GameService.isJoined()){
+        GameService.join();
+      }
+
       $scope.data = {
         processing: false,
         playerDefaults:{

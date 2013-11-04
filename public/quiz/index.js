@@ -1,4 +1,4 @@
-/*global QuizNewPlayerController, QuizAdminController, QuizGameController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox, QuizQuizResource, QuizQuestionResource, QuizPlayerResource, QuizGameService*/
+/*global QuizNewPlayerController, QuizAdminController, QuizGameController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox, QuizQuizResource, QuizQuestionResource, QuizPlayerResource, QuizGameService, QuizQuizController*/
 (function(
   angular,
   QuizNewPlayerController,
@@ -12,12 +12,13 @@
   QuizQuizResource,
   QuizQuestionResource,
   QuizPlayerResource,
-  QuizGameService
+  QuizGameService,
+  QuizQuizController
   ){
   'use strict';
   angular
-    .module('quizModule', ['ngRoute', 'ngResource', 'ngCookies', 'ngSanitize'])
-    .config(['$routeProvider', function ($routeProvider) {
+    .module('quizModule', ['ngRoute', 'ngResource', 'ngCookies', 'ngSanitize', 'btford.socket-io'])
+    .config(['$routeProvider', 'socketProvider', '$sceProvider', function ($routeProvider, socketProvider, $sceProvider) {
       $routeProvider
         .when('/quiz/new-player',{
           controller: QuizNewPlayerController,
@@ -27,10 +28,24 @@
           controller: QuizGameController,
           templateUrl: 'quiz/templates/game.tmpl'
         })
+        .when('/quiz/quiz/:name', {
+          controller: QuizQuizController,
+          templateUrl: 'quiz/templates/quiz.tmpl'
+        })
         .when('/quiz/admin', {
           controller: QuizAdminController,
           templateUrl: 'quiz/templates/admin.tmpl'
         });
+
+      socketProvider.prefix('');
+      $sceProvider.enabled(false);
+    }])
+    .run(['socket', function(socket){
+      socket.forward('qstart');
+      socket.forward('qend');
+      socket.forward('qwon');
+      socket.forward('qlost');
+      socket.forward('iwon');
     }])
     .factory('GameResource',  QuizGameResource)
     .factory('QuizResource',  QuizQuizResource)
@@ -59,5 +74,6 @@
     QuizQuizResource,
     QuizQuestionResource,
     QuizPlayerResource,
-    QuizGameService
+    QuizGameService,
+    QuizQuizController
   );

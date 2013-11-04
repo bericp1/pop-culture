@@ -3,7 +3,7 @@
     <div class="row-fluid">
       <div class="col-lg-4 offset4">
 
-        <div class="form-group" ng-hide="data.state===const.STATE.LOADING">
+        <div class="form-group" ng-hide="data.state===const.STATE.LOADING || true">
           <span class="input-group input-group-sm">
             <span class="input-group-addon">
               You have
@@ -31,13 +31,14 @@
 
         <div class="card well" ng-if="data.state===const.STATE.ACTIVE">
 
-          <h2>Start Guessing!</h2>
-
+          <h2>{{data.qType}} #{{data.qNum}}</h2>
+          <h3>Start Guessing!</h3>
+          <br><br>
           <div class="form-group">
             <div class="input-group">
-              <input type="text" ng-model="data.guess" ng-disabled="data.processing" class="form-control">
+              <input type="text" ng-model="data.toCheck" ng-disabled="data.processing" class="form-control">
               <span class="input-group-btn">
-                <span class="btn btn-primary" ng-click="fn.try()" ng-disabled="data.processing">Try</span>
+                <span class="btn btn-primary" ng-click="fn.check()" ng-disabled="data.processing">Try</span>
               </span>
             </div>
           </div>

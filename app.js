@@ -1,15 +1,21 @@
 var express         = require('express'),
+  http              = require('http'),
 //  validate          = require('mongoose-validate'),
   mongoose          = require('mongoose'),
   path              = require('path'),
   rroute            = require('./lib/rroute'),
   rmodel            = require('./lib/rmodel'),
-  connectLivereload = require('connect-livereload');
+  connectLivereload = require('connect-livereload'),
+  socketIO          = require('socket.io');
 
 require('express-mongoose');
 
 //Export
 var app = module.exports = express();
+
+var server = http.createServer(app);
+
+var io = socketIO.listen(server);
 
 //Configuration
 app.set('port',       process.env.PORT || 8000);
@@ -56,6 +62,7 @@ conn.once('open', function(){
     app.use(app.router);
     app.use(express.errorHandler());
     app.use(rroute(app.get('routesDir')));
+    app.set('io log level', 0);
   }
 //Development Middleware
   else if(app.get('env') === 'development'){
@@ -69,10 +76,32 @@ conn.once('open', function(){
     app.use(app.router);
     app.use(express.errorHandler());
     app.use(rroute(app.get('routesDir')));
+    app.set('io log level', 3);
   }
 
+  //Socket.io logic. Probs needs to go somewhere else but yolo nuggets
+
+  io.set('log level', app.get('io log level'));
+  io.sockets.on('connection', function(socket){
+    socket.on('qstart', function(msg){
+      io.sockets.emit('qstart', msg);
+    });
+    socket.on('qend', function(msg){
+      io.sockets.emit('qend', msg);
+    });
+    socket.on('qwon', function(msg){
+      io.sockets.emit('qwon', msg);
+    });
+    socket.on('qlost', function(msg){
+      io.sockets.emit('qlost', msg);
+    });
+    socket.on('iwon', function(msg){
+      io.sockets.emit('iwon', msg);
+    });
+  });
+
 //Start Listening
-  app.listen(app.get('port'), function () {
+  server.listen(app.get('port'), function () {
     console.log('Listening on port ' + app.get('port') + ' in ' + app.get('env') + ' mode.\n', app.get('moreToLog'));
   });
 });

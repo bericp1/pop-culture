@@ -24,6 +24,8 @@
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+
+    <script src="../vendor/jquery/jquery.min.js"></script>
 	</head>
 
 	<body>
@@ -39,12 +41,12 @@
         <section id="the-why">
           <h1>The “Why”</h1>
           <ul>
-            <li>How modern companies compete</li>
-            <li>
+            <li class="fragment roll-in">How modern companies compete</li>
+            <li class="fragment roll-in">
               Provides company recognition
               <ul>
-                <li>Memorable</li>
-                <li>Likable</li>
+                <li class="fragment roll-in">Memorable</li>
+                <li class="fragment roll-in">Likable</li>
               </ul>
             </li>
           </ul>
@@ -53,48 +55,60 @@
         <section id="the-how">
           <h1>The “How”</h1>
           <ul class="no-bullet">
-            <li>Slogans</li>
-            <li>Logos</li>
-            <li>Commercials</li>
+            <li class="fragment roll-in">Slogans</li>
+            <li class="fragment roll-in">Logos</li>
+            <li class="fragment roll-in">Commercials</li>
           </ul>
         </section>
 
         <section id="slogans">
-          <h1>Slogans</h1>
-          <ul>
-            <li>Short and sweet</li>
-            <li>
-              Catchy
-              <ul>
-                <li>Rhymes</li>
-                <li>Follows a familiar tune</li>
-              </ul>
-            </li>
-          </ul>
+          <section id="slogans-info">
+            <h1>Slogans</h1>
+            <ul>
+              <li class="fragment roll-in">Short and sweet</li>
+              <li class="fragment roll-in">
+                Catchy
+                <ul>
+                  <li class="fragment roll-in">Rhymes</li>
+                  <li class="fragment roll-in">Follows a familiar tune</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section class="quiz" id="slogans-quiz" data-quiz="Slogans"></section>
         </section>
 
         <section id="logos">
-          <h1>Logos</h1>
-          <ul class="no-bullet">
-            <li>Colors to trigger feelings</li>
-            <li>Simple</li>
-            <li>Unique</li>
-          </ul>
+          <section id="logos-info">
+            <h1>Logos</h1>
+            <ul class="no-bullet">
+              <li class="fragment roll-in">Colors to trigger feelings</li>
+              <li class="fragment roll-in">Simple</li>
+              <li class="fragment roll-in">Unique</li>
+            </ul>
+          </section>
+
+          <section class="quiz" id="logos-quiz" data-quiz="Logos"></section>
         </section>
 
         <section id="commercials">
-          <h1>Commercials</h1>
-          <ul>
-            <li>Humorous</li>
-            <li>Musical</li>
-            <li>
-              Consistent Aspects
-              <ul>
-                <li>Jimmy Johns &#8594; Speed</li>
-                <li>Follows a familiar tune</li>
-              </ul>
-            </li>
-          </ul>
+          <section id="commercials-info">
+            <h1>Commercials</h1>
+            <ul>
+              <li class="fragment roll-in">Humorous</li>
+              <li class="fragment roll-in">Musical</li>
+              <li class="fragment roll-in">
+                Consistent Aspects
+                <ul>
+                  <li class="fragment roll-in">Jimmy Johns &#8594; Speed</li>
+                  <li class="fragment roll-in">Follows a familiar tune</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section class="quiz" id="commercials-quiz" data-quiz="Commercials"></section>
         </section>
 
         <section id="conclusion">
@@ -111,6 +125,18 @@
 		<script src="js/reveal.js"></script>
 
 		<script>
+
+      var $frameTemplate = $('<iframe></iframe>');
+
+      $('section.quiz').each(function(i,e){
+        var $e = $(e);
+        var $frame = $frameTemplate.clone();
+        $frame
+          .attr('src', '/#/quiz/quiz/' + $e.data('quiz'))
+          .attr('allowtransparency', 'true')
+          .attr('scrolling', 'no');
+        $e.append($frame);
+      });
 
 			// Full list of configuration options available here:
 			// https://github.com/hakimel/reveal.js#configuration

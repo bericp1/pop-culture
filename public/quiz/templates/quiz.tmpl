@@ -1,0 +1,64 @@
+<div class="container quiz-container">
+  <div class="row">
+    <div class="span12">
+      <div class="panel panel-primary">
+        <div class="panel-heading text-center">
+          <h1>{{data.quiz.name}}</h1>
+        </div>
+
+        <div class="panel-body text-center" ng-if="data.activeQuestionIndex == -1 && !data.ready">
+          <h2>Loading...</h2>
+        </div>
+
+        <div class="panel-body text-center" ng-if="data.ready">
+          <h2>Ready?</h2>
+        </div>
+
+        <div ng-repeat="q in data.questions">
+          <div class="panel-body text-center" ng-if="data.questions[data.activeQuestionIndex]._id == q._id && !data.winner">
+            <div ng-if="q.type == 'slogan'">
+              <h1 class="slogan">{{q.content}}</h1>
+            </div>
+            <div ng-if="q.type == 'logo'">
+              <img ng-src="{{q.content}}" class="logo">
+            </div>
+            <div ng-if="q.type == 'commercial'">
+              <iframe class="ytplayer" type="text/html" width="640" height="360"
+                      ng-src="{{'http://www.youtube.com/embed/' + q.content + '?autoplay=1&controls=0&modestbranding=1&showinfo=0&autohide=1'}}"
+                      frameborder="0"></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body text-center winner" ng-if="data.winner">
+          <h1>{{data.winner.name}}</h1>
+          <h2>is the winner!</h2>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="span12 btn-group btn-group-justified">
+      <span class="btn btn-primary" ng-click="fn.prev()">Previous Question</span>
+      <span class="btn btn-primary" ng-click="fn.next()">Next Question</span>
+    </div>
+  </div>
+
+
+  <style type="text/css">
+    html,body{
+      background: none transparent !important;
+    }
+
+    h1.slogan{
+      margin: 50px 0px;
+    }
+    img.logo{
+      width: 256px;
+      margin: 50px auto;
+    }
+  </style>
+</div>
