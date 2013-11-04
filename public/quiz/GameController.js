@@ -1,4 +1,5 @@
 /*exported QuizGameController */
+/*global alert */
 var QuizGameController = (function(){
   'use strict';
   return [
@@ -36,7 +37,7 @@ var QuizGameController = (function(){
       $scope.fn.check = function(){
         var won = false;
         $.each(GameService.activeAnswers, function(i,v){
-          if(v.toLowerCase().trim() == $scope.data.toCheck.toLowerCase().trim()){
+          if(v.toLowerCase().trim() === $scope.data.toCheck.toLowerCase().trim()){
             GameService.win();
             won = true;
             return false;

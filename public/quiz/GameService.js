@@ -62,16 +62,16 @@ var QuizGameService = (function(){
           me.state = STATE.ACTIVE;
         });
         $rootScope.$on('qlost', function(event, msg){
-          if(me.player._id != msg._id){
+          if(me.player._id !== msg._id){
             me.state = STATE.LOST;
           }
         });
         $rootScope.$on('qwon', function(event, msg){
-          if(me.player._id == msg._id){
+          if(me.player._id === msg._id){
             me.state = STATE.WON;
           }
         });
-        $rootScope.$on('qend', function(event, msg){
+        $rootScope.$on('qend', function(){
           delete me.activeAnswers;
           delete me.activeQuestionNumber;
           delete me.activeQuestionType;
