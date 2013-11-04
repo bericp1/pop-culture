@@ -23,7 +23,7 @@
           controller: QuizNewPlayerController,
           templateUrl: 'quiz/templates/new-player.tmpl'
         })
-        .when('/quiz/game/:id', {
+        .when('/quiz/game', {
           controller: QuizGameController,
           templateUrl: 'quiz/templates/game.tmpl'
         })

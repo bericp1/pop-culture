@@ -1,5 +1,4 @@
 /*exported QuizNewPlayerController */
-/*global alert */
 var QuizNewPlayerController = (function(){
   'use strict';
   return [
@@ -18,10 +17,6 @@ var QuizNewPlayerController = (function(){
       GameService
       ){
 
-      if(GameService.isJoined()){
-        GameService.join();
-      }
-
       $scope.data = {
         processing: false,
         playerDefaults:{
@@ -29,7 +24,6 @@ var QuizNewPlayerController = (function(){
           points: 0
         },
         player: {},
-        saved: false,
         games: GameResource.query(function(){
           $scope.data.gamesLoaded = true;
           if($scope.data.games.length > 0) $scope.data.player.game = $scope.data.games[0]._id;
@@ -40,67 +34,37 @@ var QuizNewPlayerController = (function(){
 
       $scope.data.player = $scope.data.playerDefaults;
 
-      if(typeof $cookieStore.get('player') === 'string'){
-        PlayerResource.get({_id:$cookieStore.get('player')},function(player){
-          $scope.data.player = player;
-          $scope.data.saved = true;
-        }, function(data){
-          $cookieStore.remove('player');
-          if(data.status !== 404 && typeof data.data.error === 'string'){
-            alert(':-/\nSave data corrupt or something:\n' + data.data.error);
-          }
-        });
-      }
-
       $scope.fn = {};
 
       $scope.fn.newPlayer = function(){
         $scope.data.processing = true;
-        var newPlayer = new PlayerResource();
-        for(var prop in $scope.data.player){
-          if($scope.data.player.hasOwnProperty(prop)){
-            newPlayer[prop] = $scope.data.player[prop];
-          }
-        }
-        newPlayer.$save(function(newPlayer){
-          $cookieStore.put('player', newPlayer._id);
-          $scope.data.player = $scope.data.playerDefaults;
-          $scope.data.processing = false;
-          GameService.join($scope.data.player);
-        }, function(data){
-          if(typeof data.data.invalid === 'object'){
+        GameService.join($scope.data.player, function(){}, function(err){
+          if(typeof err.data.invalid === 'object'){
             var str = '';
-            $.each(data.data.invalid, function(i,v){
+            $.each(err.data.invalid, function(i,v){
               str = str + '\n' + v.name + ': ' + v.message;
             });
-            alert('-_-\nThere\'s something wrong with the data you entered:' + str);
+            GameService.die('-_-\nThere\'s something wrong with the data you entered:' + str);
             $scope.data.player = $scope.data.playerDefaults;
             $scope.data.processing = false;
-          }else if(typeof data.data.error === 'string'){
-            alert(':/\nWhoops:\n' + data.data.error); //TODO Replace
+          }else if(typeof err.data.error === 'string'){
+            GameService.die(':/\nWhoops', err.data.error); //TODO Replace
             $scope.data.player = $scope.data.playerDefaults;
             $scope.data.processing = false;
           }else{
-            alert('D:\nSomething really bad went wrong! Try again later.'); //TODO Replace
+            GameService.die('D:\nSomething really bad went wrong! Try again later.'); //TODO Replace
           }
         });
       };
 
-      $scope.fn.deletePlayer = function(id){
+      $scope.fn.deletePlayer = function(){
         $scope.processing = true;
-        var player = new PlayerResource();
-        player._id = id;
-        player.$delete(function(){
-          $scope.data.saved = false;
-          $scope.data.player = $scope.data.playerDefaults;
-          $cookieStore.remove('player');
-          $scope.processing = false;
-        }, function(data){
-          if(typeof data.data.error === 'string'){
-            alert(':/\nCouldn\'t unregister you as a player: ' + data.data.error); //TODO Replace
+        GameService.leave(function(err){
+          if(typeof err.data.error === 'string'){
+            GameService.die('Couldn\'t unregister you as a player', err.data.error);
             $scope.data.processing = false;
           }else{
-            alert('D:\nSomething really bad went wrong! Try again later.'); //TODO Replace
+            GameService.die('D:\nSomething really bad went wrong! Try again later.'); //TODO Replace
           }
         });
       };

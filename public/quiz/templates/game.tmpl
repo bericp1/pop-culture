@@ -4,7 +4,7 @@
       <div class="col-lg-4 offset4">
 
         <div class="form-group" ng-hide="data.state===const.STATE.LOADING">
-          <span class="input-group input-group-lg">
+          <span class="input-group input-group-sm">
             <span class="input-group-addon">
               You have
             </span>
@@ -27,9 +27,24 @@
           <img src="../../assets/images/arrow-up-white.png">
         </div>
 
-        <div class="card" ng-if="data.state===const.STATE.ACTIVE">
+
+
+        <div class="card well" ng-if="data.state===const.STATE.ACTIVE">
+
+          <h2>Start Guessing!</h2>
+
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" ng-model="data.guess" ng-disabled="data.processing" class="form-control">
+              <span class="input-group-btn">
+                <span class="btn btn-primary" ng-click="fn.try()" ng-disabled="data.processing">Try</span>
+              </span>
+            </div>
+          </div>
 
         </div>
+
+
 
         <div class="alert alert-danger card" ng-if="data.state===const.STATE.LOST">
           <h1>Sorry!</h1>
