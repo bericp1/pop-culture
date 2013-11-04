@@ -3,7 +3,7 @@
  */
 (function(angular){
   'use strict';
-  angular.module('pop-culture', ['compiled-templates', 'ngRoute', 'quizModule', 'presentationModule'])
+  angular.module('pop-culture', ['compiled-templates', 'ngRoute', 'quizModule'])
     .config(['$routeProvider', function ($routeProvider) {
       $routeProvider
         .otherwise({

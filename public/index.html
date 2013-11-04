@@ -8,16 +8,17 @@
   <link type="text/css" rel="stylesheet" href="vendor/bootswatch/active-theme/bootstrap.css">
   <link type="text/css" rel="stylesheet" href="vendor/bootstrap/css/bootstrap-responsive.css">
   <script src="vendor/jquery/jquery.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.js"></script>
   <script src="vendor/angular/angular.js"></script>
   <script src="vendor/angular/angular-animate.js"></script>
   <script src="vendor/angular/angular-resource.js"></script>
   <script src="vendor/angular/angular-route.js"></script>
   <script src="vendor/angular/angular-cookies.js"></script>
   <script src="vendor/angular/angular-sanitize.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.js"></script>
   <!-- build:css styles.css -->
-  <link type="text/css" rel="stylesheet" href="assets/styles/main.css">
+  <link type="text/css" rel="stylesheet" href="quiz/templates/main.css">
   <link type="text/css" rel="stylesheet" href="quiz/templates/admin.css">
+  <link type="text/css" rel="stylesheet" href="quiz/templates/game.css">
   <!-- endbuild -->
 </head>
 <body ng-app="pop-culture" ng-view>
@@ -25,11 +26,11 @@
 <!-- build:js scripts.js -->
 <script src="assets/js/util.js"></script>
 <script src="assets/js/templates.js"></script>
-<script src="presentation/index.js"></script>
 <script src="quiz/NewPlayerController.js"></script>
 <script src="quiz/AdminController.js"></script>
 <script src="quiz/GameController.js"></script>
 <script src="quiz/GameResource.js"></script>
+<script src="quiz/GameService.js"></script>
 <script src="quiz/QuizResource.js"></script>
 <script src="quiz/QuestionResource.js"></script>
 <script src="quiz/PlayerResource.js"></script>

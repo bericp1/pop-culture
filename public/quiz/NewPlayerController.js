@@ -8,13 +8,19 @@ var QuizNewPlayerController = (function(){
     '$cookieStore',
     'GameResource',
     'PlayerResource',
+    'GameService',
     function(
       $scope,
       $location,
       $cookieStore,
       GameResource,
-      PlayerResource
+      PlayerResource,
+      GameService
       ){
+
+      if(GameService.isJoined()){
+        GameService.join();
+      }
 
       $scope.data = {
         processing: false,
@@ -30,6 +36,7 @@ var QuizNewPlayerController = (function(){
         }),
         gamesLoaded: false
       };
+
 
       $scope.data.player = $scope.data.playerDefaults;
 
@@ -57,20 +64,9 @@ var QuizNewPlayerController = (function(){
         }
         newPlayer.$save(function(newPlayer){
           $cookieStore.put('player', newPlayer._id);
-          //TODO Won'e be necessary to get game once autoPopulate is implemented
-          GameResource.get({_id: $scope.data.player.game}, function(game){
-            $location.path('/quiz/game/' + game._id);
-          }, function(data){
-            if(typeof data.data.error === 'string'){
-              alert(':/\nWhoops: ' + data.data.error); //TODO Replace
-              $scope.data.player = $scope.data.playerDefaults;
-              $scope.data.processing = false;
-            }else{
-              alert('D:\nSomething really bad went wrong! Try again later.'); //TODO Replace
-            }
-          });
           $scope.data.player = $scope.data.playerDefaults;
           $scope.data.processing = false;
+          GameService.join($scope.data.player);
         }, function(data){
           if(typeof data.data.invalid === 'object'){
             var str = '';
@@ -107,6 +103,10 @@ var QuizNewPlayerController = (function(){
             alert('D:\nSomething really bad went wrong! Try again later.'); //TODO Replace
           }
         });
+      };
+
+      $scope.fn.joinGame = function(){
+        GameService.join($scope.data.player);
       };
 
       $scope.enterCheck = function($event, fn){

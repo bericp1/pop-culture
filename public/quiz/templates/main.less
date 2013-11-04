@@ -1,0 +1,66 @@
+@import "../../vendor/bootswatch/active-theme/variables";
+
+html{
+  background: @brand-primary;
+}
+
+body{
+  /*@media screen and (min-width: 400px) {
+    &>div.container:first-child{
+      margin-top: 50px;
+    }
+  }*/
+
+  .header,.footer{
+    background: @brand-primary;
+    font-weight: bold;
+    color: @body-bg;
+
+    width: 100%;
+    padding: 20px;
+
+    h1,h2,h3,h4,h5,h6{
+      color: inherit;
+      margin: 0;
+    }
+  }
+
+  .header{
+    margin-bottom: 30px;
+
+    h1{
+      margin-bottom: 20px;
+    }
+    h2{
+      margin-bottom: 5px;
+    }
+  }
+
+  .footer{
+    margin-top: 20px;
+  }
+
+  .container{
+    /*h1,h2,h3,h4,h5,h6{
+      margin: 0;
+      padding: 0;
+    }
+    h1{
+      margin-bottom: 30px;
+    }
+    h2, h3{
+      margin-bottom: 25px;
+    }
+    h4{
+      margin-bottom: 15px;
+    }
+    h5,h6{
+      margin-bottom: 10px;
+    }*/
+  }
+
+  @media (max-width: 767px){
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}

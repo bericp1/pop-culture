@@ -2,23 +2,44 @@
 var QuizGameController = (function(){
   'use strict';
   return [
-    /*'$scope',
-    '$routeParams',
-    'GameResource',
-    'QuizResource',
-    'QuestionResource',
-    'PlayerResource',*/
+    '$scope',
+    'GameService',
+    '$location',
     function (
-      /*$scope,
-      $routeParams,
-      GameResource,
-      QuizResource,
-      QuestionResource,
-      PlayerResource*/)
+      $scope,
+      GameService)
     {
 
-      //TODO
+      $scope.const = {
+        STATE: {
+          LOADING: 'loading',
+          WAITING: 'waiting',
+          ACTIVE: 'active',
+          LOST: 'lost',
+          WON: 'won'
+        }
+      };
 
+      $scope.data = {
+        state: $scope.const.STATE.WAITING,
+        player: {}
+      };
+
+      $scope.fn = {};
+
+      $scope.fn.leave = function(){
+        GameService.leave();
+      };
+
+      $scope.$watch(function(){return GameService.player;}, function(data){
+        $scope.data.player = data;
+      });
+
+      $scope.$watch(GameService.isJoined, function(joined){
+        if(joined){
+          $scope.data.state = $scope.const.STATE.WAITING;
+        }else{}
+      });
     }
   ];
 })();

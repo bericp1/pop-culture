@@ -1,4 +1,4 @@
-/*global QuizNewPlayerController, QuizAdminController, QuizGameController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox, QuizQuizResource, QuizQuestionResource, QuizPlayerResource*/
+/*global QuizNewPlayerController, QuizAdminController, QuizGameController, QuizGameResource, QuizHead, QuizFoot, QuizStatusBox, QuizAdminPasswordBox, QuizQuizResource, QuizQuestionResource, QuizPlayerResource, QuizGameService*/
 (function(
   angular,
   QuizNewPlayerController,
@@ -11,7 +11,8 @@
   QuizAdminPasswordBox,
   QuizQuizResource,
   QuizQuestionResource,
-  QuizPlayerResource
+  QuizPlayerResource,
+  QuizGameService
   ){
   'use strict';
   angular
@@ -35,6 +36,7 @@
     .factory('QuizResource',  QuizQuizResource)
     .factory('QuestionResource',  QuizQuestionResource)
     .factory('PlayerResource',  QuizPlayerResource)
+    .factory('GameService',  QuizGameService)
     .directive('head',        QuizHead)
     .directive('foot',        QuizFoot)
     .directive('statusBox',  QuizStatusBox)
@@ -56,5 +58,6 @@
     QuizAdminPasswordBox,
     QuizQuizResource,
     QuizQuestionResource,
-    QuizPlayerResource
+    QuizPlayerResource,
+    QuizGameService
   );

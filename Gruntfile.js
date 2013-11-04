@@ -101,7 +101,10 @@ module.exports = function (grunt) {
         '!public/styles*.css',
         '!public/vendor',
         '!public/assets',
-        '!node_modules/**/*'
+        '!node_modules/**/*',
+
+
+        '!public/presentation'
       ]
     },
 
@@ -132,7 +135,7 @@ module.exports = function (grunt) {
         'tasks/**/*.js'
       ],
       client: {
-        src: ['public/**/*.js', '!public/vendor/**/*.js'],
+        src: ['public/**/*.js', '!public/vendor/**/*.js', '!public/presentation/**/*.js'],
         options: {
           browser: true,
           node: false,
