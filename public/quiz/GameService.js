@@ -55,7 +55,6 @@ var QuizGameService = (function(){
           }
         });*/
         $rootScope.$on('qstart', function(event, msg){
-          console.log(msg);
           me.activeAnswers = msg.answers;
           me.activeQuestionNumber = msg.number;
           me.activeQuestionType = msg.type;
