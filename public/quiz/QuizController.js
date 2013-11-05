@@ -48,7 +48,7 @@ var QuizQuizController = (function(){
         socket.emit('qend', {});
         delete $scope.data.winner;
         var tmp = $scope.data.activeQuestionIndex;
-        if(opFunc(tmp) < 0 || opFunc(tmp) > 2){
+        if(opFunc(tmp) < 0 || opFunc(tmp) > ($scope.data.questions.length-1)){
           $scope.data.activeQuestionIndex = -1;
         }else{
           $scope.data.activeQuestionIndex = -1;
@@ -79,29 +79,49 @@ var QuizQuizController = (function(){
 
       $window.addEventListener('message', function(msg){
         if(msg.data === 'slide:start'){
-          //socket.emit('qstart', {'as':$scope.data.questions.answers});
           $scope.$apply(function(){
             $scope.data.activeQuestionIndex = -1;
             $scope.data.ready = false;
             $scope.fn.next();
           });
+          $window.parent.jQuery('.present iframe', $window.parent.document).focus();
+          $window.focus();
         }else if(msg.data === 'slide:stop'){
           $scope.$apply(function(){
             $scope.data.activeQuestionIndex = -1;
             $scope.data.ready = false;
             socket.emit('qend');
           });
+          $window.parent.jQuery($window.parent.document).focus();
+          $window.parent.focus();
         }
       }, false);
 
       $($window.document).on('keyup', function(eo){
-        if(eo.which === 39 || eo.which === 40){
-          $window.parent.Reveal.next();
+        if(!$scope.data.ready){
+          if(eo.which === 39 || eo.which === 40 || eo.which === 32){
+            if($scope.data.activeQuestionIndex >= ($scope.data.questions.length-1)){
+              $window.parent.Reveal.next();
+              $window.parent.jQuery($window.parent.document).focus();
+              $window.parent.focus();
+            }else{
+              $scope.$apply(function(){
+                $scope.fn.next();
+              });
+            }
+          }
+          if(eo.which === 37 || eo.which === 38){
+            if($scope.data.activeQuestionIndex <= 0){
+              $window.parent.Reveal.prev();
+              $window.parent.jQuery($window.parent.document).focus();
+              $window.parent.focus();
+            }else{
+              $scope.$apply(function(){
+                $scope.fn.prev();
+              });
+            }
+          }
         }
-        if(eo.which === 37 || eo.which === 38){
-          $window.parent.Reveal.prev();
-        }
-        $window.parent.jQuery($window.parent.document).focus();
       });
 
     }
