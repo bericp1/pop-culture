@@ -48,6 +48,8 @@ var QuizGameController = (function(){
         });
         if(!won){
           alert('Try Again!');
+          $scope.data.processing = false;
+          $scope.data.toCheck = '';
         }
       };
 
