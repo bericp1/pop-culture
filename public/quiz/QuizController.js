@@ -94,6 +94,16 @@ var QuizQuizController = (function(){
         }
       }, false);
 
+      $($window.document).on('keyup', function(eo){
+        if(eo.which === 39 || eo.which === 40){
+          $window.parent.Reveal.next();
+        }
+        if(eo.which === 37 || eo.which === 38){
+          $window.parent.Reveal.prev();
+        }
+        $window.parent.jQuery($window.parent.document).focus();
+      });
+
     }
   ];
 })();
