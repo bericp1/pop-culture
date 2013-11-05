@@ -82,6 +82,9 @@ conn.once('open', function(){
   //Socket.io logic. Probs needs to go somewhere else but yolo nuggets
 
   io.set('log level', app.get('io log level'));
+  io.set('transports', ['xhr-polling']);
+  io.set('polling duration', 10);
+
   io.sockets.on('connection', function(socket){
     socket.on('qstart', function(msg){
       io.sockets.emit('qstart', msg);
