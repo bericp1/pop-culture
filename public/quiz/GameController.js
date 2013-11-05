@@ -5,7 +5,6 @@ var QuizGameController = (function(){
   return [
     '$scope',
     'GameService',
-    '$location',
     function (
       $scope,
       GameService)
@@ -20,7 +19,8 @@ var QuizGameController = (function(){
       $scope.data = {
         state: $scope.const.STATE.WAITING,
         player: {},
-        toCheck: ''
+        toCheck: '',
+        processing: false
       };
 
       $scope.data.isJoined = GameService.isJoined;
@@ -35,6 +35,7 @@ var QuizGameController = (function(){
       };
 
       $scope.fn.check = function(){
+        $scope.data.processing = true;
         var won = false;
         $.each(GameService.activeAnswers, function(i,v){
           if(v.toLowerCase().trim() === $scope.data.toCheck.toLowerCase().trim()){
@@ -48,7 +49,6 @@ var QuizGameController = (function(){
         if(!won){
           alert('Try Again!');
         }
-        $scope.data.toCheck = '';
       };
 
       $scope.$watch(function(){return GameService.player;}, function(data){
@@ -65,6 +65,10 @@ var QuizGameController = (function(){
 
       $scope.$watch(function(){return GameService.state;}, function(newState){
         $scope.data.state = newState;
+        if(newState === $scope.const.STATE.ACTIVE){
+          $scope.data.processing = false;
+          $scope.data.toCheck = '';
+        }
       });
     }
   ];
