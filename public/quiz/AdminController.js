@@ -7,12 +7,14 @@ var QuizAdminController = (function(){
     'QuizResource',
     'QuestionResource',
     'PlayerResource',
+    'socket',
     function (
       $scope,
       GameResource,
       QuizResource,
       QuestionResource,
-      PlayerResource)
+      PlayerResource,
+      socket)
     {
 
       var STATUS_CLASS_SUCCESS = 'success';
@@ -107,6 +109,11 @@ var QuizAdminController = (function(){
             },
             'delete': function(id){
               $scope.data.deleteThing('player', PlayerResource, id);
+            }
+          },
+          sendEvent: function(ev){
+            if(ev){
+              socket.emit(ev);
             }
           }
         },

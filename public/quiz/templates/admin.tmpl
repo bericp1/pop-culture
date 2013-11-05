@@ -12,7 +12,17 @@
 </div>
 
 <div class="row-fluid">
-  <div class="span4 offset4" admin-password-box></div>
+  <div class="span4 offset3" admin-password-box></div>
+  <div class="span2 panel panel-primary">
+    <div class="panel-heading">
+      Emit event
+    </div>
+    <div class="panel-body">
+      <div class="btn-group btn-group-justified">
+        <span class="btn btn-danger" ng-click="data.funcs.sendEvent('qend')">Reset all (<code>qend</code>)</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!--------------------- Questions ---------------------->
